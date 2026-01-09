@@ -21,7 +21,7 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
     public function getFormattedTimeAttribute(){
-        return $this->created_at->diffForHumans();
+        return $this->created_at ? $this->created_at->diffForHumans() : '' ;
     }
     public function getLikeCountAttribute(){
         return $this->like->count();

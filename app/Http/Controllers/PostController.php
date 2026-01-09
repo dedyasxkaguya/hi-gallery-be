@@ -10,8 +10,8 @@ class PostController extends Controller
     public static function index(){
         return response()->json(Post::latest()->with('user')->get());
     }
-    public static function show(Post $post){
-        return response()->json($post->with('user')->with('comment.user')->with('like')->first());
+    public static function show($slug){
+        return response()->json(Post::where('slug',$slug)->with('user')->with('comment.user')->with('like')->first());
 
     }
     public static function showDetail($id){
