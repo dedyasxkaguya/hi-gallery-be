@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 'password' => '03120900',
                 'flag' => 'https://flagcdn.com/w320/jp.png',
                 'nationality' => 'Japan',
+                'image'=>'profile-images/kazuma.jpg'
             ],
             [
                 'name' => 'shinkai_makoto',
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
                 'password' => 'shinkaithebest',
                 'flag' => 'https://flagcdn.com/w640/jp.png',
                 'nationality' => 'Japan',
+                'image'=>'profile-images/shinkai.png'
             ],
             [
                 'name' => 'anyaiscute',
@@ -38,6 +40,7 @@ class DatabaseSeeder extends Seeder
                 'password' => 'spyfamily',
                 'flag' => 'https://flagcdn.com/w640/jp.png',
                 'nationality' => 'Japan',
+                'image'=>'profile-images/anya.jpg'
             ],
             [
                 'name' => '4_dzan',
@@ -45,6 +48,7 @@ class DatabaseSeeder extends Seeder
                 'password' => 'cally0103',
                 'flag' => 'https://flagcdn.com/w640/id.png',
                 'nationality' => 'Indonesia',
+                'image'=>'profile-images/adzan.jpg'
             ],
             [
                 'name' => 'lowen',
@@ -52,6 +56,7 @@ class DatabaseSeeder extends Seeder
                 'password' => 'whyismywifehittingme',
                 'flag' => 'https://flagcdn.com/w640/de.png',
                 'nationality' => 'Germany',
+                'image'=>'profile-images/loid.jpg'
             ],
         ];
         foreach ($users as $user) {
@@ -62,11 +67,13 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make($user['password']),
                 'slug' => Str::random(8),
                 'flag' => $user['flag'],
+                'profile_image'=>$user['image'],
                 'nationality' => $user['nationality'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+        $this->call(CategorySeeder::class);
         $this->call(PostSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(LikeSeeder::class);

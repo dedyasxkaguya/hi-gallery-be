@@ -20,13 +20,16 @@ class Post extends Model
     public function like(){
         return $this->hasMany(Like::class);
     }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
     public function getFormattedTimeAttribute(){
         return $this->created_at ? $this->created_at->diffForHumans() : '' ;
     }
     public function getLikeCountAttribute(){
-        return $this->like->count();
+        return $this->like()->count();
     }
     public function getCommentCountAttribute(){
-        return $this->comment->count();
+        return $this->comment()->count();
     }
 }

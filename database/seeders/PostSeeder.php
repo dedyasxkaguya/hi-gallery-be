@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -64,14 +65,27 @@ class PostSeeder extends Seeder
             [
                 'image'=>'post-images/image(16).jpg'
             ],
+            [
+                'image'=>'post-images/image(17).jpg'
+            ],
+            [
+                'image'=>'post-images/image(18).jpg'
+            ],
+            [
+                'image'=>'post-images/image(19).jpg'
+            ],
+            [
+                'image'=>'post-images/image(20).jpg'
+            ],
         ];
         foreach($posts as $post){
             DB::table('posts')->insert([
                 'user_id'=>User::all()->random()->id,
+                'category_id'=>Category::all()->random()->id,
                 'image'=>$post['image'],
                 'slug'=>Str::random(16),
-                'title'=>fake()->text(144),
-                'caption'=>fake()->text(512),
+                'title'=>fake()->realText(72),
+                'caption'=>fake()->realText( 256),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

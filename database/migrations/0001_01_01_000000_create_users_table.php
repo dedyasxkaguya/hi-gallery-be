@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('flag');
             $table->string('slug');
+            $table->string('profile_image');
             // $table->foreignId('')
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
