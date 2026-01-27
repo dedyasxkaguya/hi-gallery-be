@@ -77,6 +77,42 @@ class PostSeeder extends Seeder
             [
                 'image'=>'post-images/image(20).jpg'
             ],
+            [
+                'image'=>'post-images/image(21).jpg'
+            ],
+            [
+                'image'=>'post-images/image(22).jpg'
+            ],
+            [
+                'image'=>'post-images/image(23).jpg'
+            ],
+            [
+                'image'=>'post-images/image(24).jpg'
+            ],
+            [
+                'image'=>'post-images/image(25).jpg'
+            ],
+            [
+                'image'=>'post-images/image(26).jpg'
+            ],
+            [
+                'image'=>'post-images/image(27).jpg'
+            ],
+            [
+                'image'=>'post-images/image(28).jpg'
+            ],
+            [
+                'image'=>'post-images/image(29).jpg'
+            ],
+            [
+                'image'=>'post-images/image(30).jpg'
+            ],
+            [
+                'image'=>'post-images/image(31).jpg'
+            ],
+            [
+                'image'=>'post-images/image(32).jpg'
+            ],
         ];
         foreach($posts as $post){
             DB::table('posts')->insert([

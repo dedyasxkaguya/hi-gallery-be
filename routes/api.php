@@ -25,6 +25,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/account/full', [UserController::class, 'getUserDataAll']);
     Route::get('/user/follow', [UserController::class, 'getAccountFollow']);
 
+    Route::get('/post/like/{id}', [PostController::class,'checkLike']);
+    Route::get('/post/like/{id}/check', [PostController::class,'checkOnly']);
+
     // post
 
     Route::post('/user/logout', [UserController::class, 'logout']);
@@ -41,7 +44,7 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/lim', [PostController::class, 'indexLim']);
 Route::get('/post/{slug}', [PostController::class, 'show']);
 Route::get('/post/detail/{id}', [PostController::class, 'showDetail']);
-Route::get('/post/like/{id}', [PostController::class, 'addlike']);
+// Route::get('/post/like/{id}', [PostController::class, 'addlike']);
 Route::get('/post/category/{category}', [PostController::class, 'showCategory']);
 Route::get('/post/search/{name}', [PostController::class, 'search']);
 Route::get('/post/trend/top', [PostController::class, 'trend']);
