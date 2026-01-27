@@ -24,10 +24,9 @@ class UserController extends Controller
         }
     }
 
-    public function showAndPost()
+    public function showAndPost($name)
     {
-        $data = Auth::user();
-
+        $data = User::where('username',$name)->first();
         return response()->json($data->load('post.user')->load('comment')->load('like'));
     }
 
@@ -98,6 +97,16 @@ class UserController extends Controller
         return response()->json(Auth::user());
     }
 
+    public function getUserDataAll()
+    {
+        return response()->json(Auth::user()->load('following')->load('followers')->load('post'));
+    }
+
+    public function searchUser($name)
+    {
+        return response()->json(User::whereAll(['username', 'name'], 'LIKE', "%$name%")->with('post')->get());
+    }
+
     public function getFollower($id)
     {
         return response()->json(User::find($id)->load('followers'));
@@ -106,5 +115,19 @@ class UserController extends Controller
     public function getFollowing($id)
     {
         return response()->json(User::find($id)->load('following'));
+    }
+
+    public function getFollows($id)
+    {
+        if ($id) {
+            return response()->json(User::find($id)->load('following')->load('followers'));
+        } else {
+            return response()->json(Auth::user()->load('following')->load('followers'));
+        }
+    }
+
+    public function getAccountFollow()
+    {
+        return response()->json(Auth::user()->load('following')->load('followers'));
     }
 }

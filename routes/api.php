@@ -12,22 +12,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-// Route::middleware('auth:sanctum')->get('/user/account', [UserController::class, 'getUserdata']);
+
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/follows', [FollowController::class,'index']);
-Route::get('user/follower/{id}', [UserController::class,'getFollower']);
-Route::get('user/following/{id}', [UserController::class,'getFollowing']);
+Route::get('/follows', [FollowController::class, 'index']);
+Route::get('/user/{name}/all', [UserController::class, 'showAndPost']);
+Route::get('user/follows/{id}', [UserController::class, 'getFollows']);
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user/search/{slug}', [UserController::class, 'show']);
+    Route::get('/user/find/{slug}', [UserController::class, 'show']);
     Route::get('/user/{slug}/min', [UserController::class, 'showmin']);
-    Route::get('/user/{slug}/all', [UserController::class, 'showAndPost']);
     Route::get('/user/account', [UserController::class, 'getUserData']);
+    Route::get('/user/account/full', [UserController::class, 'getUserDataAll']);
+    Route::get('/user/follow', [UserController::class, 'getAccountFollow']);
+
     // post
+
     Route::post('/user/logout', [UserController::class, 'logout']);
 
-    Route::post('/follow', [FollowController::class,'follows']);
-    Route::post('/follow/check', [FollowController::class,'check']);
+    Route::post('/follow', [FollowController::class, 'follows']);
+    Route::post('/follow/check', [FollowController::class, 'check']);
+
+    Route::post('/post/add', [PostController::class,'store']);
 });
+
+Route::get('/user/search/{name}', [UserController::class, 'searchUser']);
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/lim', [PostController::class, 'indexLim']);

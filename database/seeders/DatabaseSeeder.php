@@ -69,6 +69,7 @@ class DatabaseSeeder extends Seeder
                 'flag' => $user['flag'],
                 'profile_image'=>$user['image'],
                 'nationality' => $user['nationality'],
+                'bio'=>fake()->realText(144),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
