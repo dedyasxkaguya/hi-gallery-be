@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\Framework\TestStatus\Notice;
 
 class User extends Authenticatable
 {
@@ -75,5 +76,8 @@ class User extends Authenticatable
     }
     public function getFollowerCountAttribute(){
         return $this->followers()->count();
+    }
+    public function notifications(){
+        return $this->hasMany(Notification::class);
     }
 }

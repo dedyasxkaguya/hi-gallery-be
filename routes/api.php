@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/follows', [FollowController::class, 'index']);
 Route::get('/user/{name}/all', [UserController::class, 'showAndPost']);
-Route::get('user/follows/{id}', [UserController::class, 'getFollows']);
+Route::get('/user/follows/{id}', [UserController::class, 'getFollows']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/find/{slug}', [UserController::class, 'show']);
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/account', [UserController::class, 'getUserData']);
     Route::get('/user/account/full', [UserController::class, 'getUserDataAll']);
     Route::get('/user/follow', [UserController::class, 'getAccountFollow']);
+    Route::get('/user/notification', [UserController::class, 'getNotifications']);
 
     Route::get('/post/like/{id}', [PostController::class,'checkLike']);
     Route::get('/post/like/{id}/check', [PostController::class,'checkOnly']);
@@ -36,6 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/follow/check', [FollowController::class, 'check']);
 
     Route::post('/post/add', [PostController::class,'store']);
+
+    Route::post('/notification/add',[NotificationController::class,'store']);
 });
 
 Route::get('/user/search/{name}', [UserController::class, 'searchUser']);
@@ -57,13 +61,14 @@ Route::get('/like/{like}', [LikeController::class, 'show']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'show']);
-// Route::get('/user/test', [UserController::class,'test']);
 
+Route::get('/notifications', [NotificationController::class, 'index']);
+Route::get('/notification/show/{slug}', [NotificationController::class, 'show']);
 // post
 Route::middleware('guest')->group(function () {
     Route::post('/user/register', [UserController::class, 'register']);
     Route::post('/user/login', [UserController::class, 'login']);
 }
 );
-
+Route::get('/tests', [UserController::class, 'test']);
 Route::post('/comment/add', [CommentController::class, 'store']);

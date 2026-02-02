@@ -130,4 +130,12 @@ class UserController extends Controller
     {
         return response()->json(Auth::user()->load('following')->load('followers'));
     }
+
+    public function getNotifications(){
+        return response()->json(Auth::user()->load('notifications.Post'));
+    }
+
+    public function test(){
+        return response()->json(User::all()->random()->createToken('auth_token')->plainTextToken);
+    }
 }
