@@ -26,7 +26,7 @@ class PostController extends Controller
         $image = $request->file('image')->store('/post-images');
 
         $data->image = $image;
-        $data->title = $request->title;
+        $data->title = Str::limit($request->caption,24);
         $data->caption = $request->caption;
         $data->category_id = $request->category_id;
         $data->user_id = $request->user_id;
