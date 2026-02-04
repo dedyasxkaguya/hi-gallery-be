@@ -101,6 +101,11 @@ class UserController extends Controller
     {
         return response()->json(Auth::user()->load('following')->load('followers')->load('post'));
     }
+    public function getUserFollowingData()
+    {
+        // return response()->json(Auth::user()->load('following.post')->load('followers'));
+        return response()->json(Auth::user()->load('following.post.user'));
+    }
 
     public function searchUser($name)
     {

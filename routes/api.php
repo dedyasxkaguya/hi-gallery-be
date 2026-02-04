@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{slug}/min', [UserController::class, 'showmin']);
     Route::get('/user/account', [UserController::class, 'getUserData']);
     Route::get('/user/account/full', [UserController::class, 'getUserDataAll']);
+    Route::get('/user/account/follow', [UserController::class, 'getUserFollowingData']);
     Route::get('/user/follow', [UserController::class, 'getAccountFollow']);
     Route::get('/user/notification', [UserController::class, 'getNotifications']);
 
