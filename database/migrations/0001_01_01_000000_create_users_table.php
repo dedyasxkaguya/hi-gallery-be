@@ -17,12 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('instagram')->unique()->nullable();
-            $table->string('nationality');
-            $table->string('flag');
             $table->string('slug');
             $table->string('bio')->nullable();
             $table->string('profile_image');
-            // $table->foreignId('')
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

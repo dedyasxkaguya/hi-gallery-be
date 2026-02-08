@@ -12,10 +12,14 @@ class Notification extends Model
 
     protected $casts = ['from'=>'json'];
 
+    protected $appends = ['formattedTime'];
     public function User(){
         return $this->belongsTo(User::class);
     }
     public function Post(){
         return $this->belongsTo(Post::class);
+    }
+    public function getFormattedTimeAttribute(){
+        return $this->created_at ? $this->created_at->diffForHumans() : false;
     }
 }

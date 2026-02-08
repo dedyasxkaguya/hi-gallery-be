@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
@@ -26,21 +27,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/account/full', [UserController::class, 'getUserDataAll']);
     Route::get('/user/account/follow', [UserController::class, 'getUserFollowingData']);
     Route::get('/user/follow', [UserController::class, 'getAccountFollow']);
+    Route::get('/user/{name}/follow', [UserController::class, 'getUsersFollow']);
+    Route::get('/user/favorite', [UserController::class, 'getFavorite']);
     Route::get('/user/notification', [UserController::class, 'getNotifications']);
-
+    
     Route::get('/post/like/{id}', [PostController::class,'checkLike']);
     Route::get('/post/like/{id}/check', [PostController::class,'checkOnly']);
-
+    
     // post
-
+    
     Route::post('/user/logout', [UserController::class, 'logout']);
-
+    
     Route::post('/follow', [FollowController::class, 'follows']);
     Route::post('/follow/check', [FollowController::class, 'check']);
-
+    
     Route::post('/post/add', [PostController::class,'store']);
-
+    
     Route::post('/notification/add',[NotificationController::class,'store']);
+
+    Route::post('/favorite/add', [FavoriteController::class, 'store']);
 });
 
 Route::get('/user/search/{name}', [UserController::class, 'searchUser']);

@@ -26,7 +26,8 @@ class UserController extends Controller
 
     public function showAndPost($name)
     {
-        $data = User::where('username',$name)->first();
+        $data = User::where('username', $name)->first();
+
         return response()->json($data->load('post.user')->load('comment')->load('like'));
     }
 
@@ -101,6 +102,7 @@ class UserController extends Controller
     {
         return response()->json(Auth::user()->load('following')->load('followers')->load('post'));
     }
+
     public function getUserFollowingData()
     {
         // return response()->json(Auth::user()->load('following.post')->load('followers'));
@@ -135,12 +137,23 @@ class UserController extends Controller
     {
         return response()->json(Auth::user()->load('following')->load('followers'));
     }
+    public function getUsersFollow($name)
+    {
+        return response()->json(User::where('name',$name)->first()->load('following')->load('followers'));
+    }
 
-    public function getNotifications(){
+    public function getNotifications()
+    {
         return response()->json(Auth::user()->load('notifications.Post'));
     }
 
-    public function test(){
+    public function getFavorite()
+    {
+        return response()->json(Auth::user()->load('favorite.post.user'));
+    }
+
+    public function test()
+    {
         return response()->json(User::all()->random()->createToken('auth_token')->plainTextToken);
     }
 }

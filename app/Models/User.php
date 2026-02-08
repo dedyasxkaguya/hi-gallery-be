@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use PHPUnit\Framework\TestStatus\Notice;
 
 class User extends Authenticatable
 {
@@ -34,7 +33,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    protected $appends = ['postCount','commentCount','LikeCount','followingCount','followerCount'];
+
+    protected $appends = ['postCount', 'commentCount', 'LikeCount', 'followingCount', 'followerCount', 'favoriteCount'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -47,37 +48,69 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function post(){
+
+    public function post()
+    {
         return $this->hasMany(Post::class);
     }
-    public function comment(){
+
+    public function comment()
+    {
         return $this->hasMany(Comment::class);
     }
-    public function like(){
+
+    public function like()
+    {
         return $this->hasMany(Like::class);
     }
-    public function getPostCountAttribute(){
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function getPostCountAttribute()
+    {
         return $this->post()->count();
     }
-    public function getLikeCountAttribute(){
+
+    public function getLikeCountAttribute()
+    {
         return $this->like()->count();
     }
-    public function getCommentCountAttribute(){
+
+    public function getCommentCountAttribute()
+    {
         return $this->comment()->count();
     }
-    public function following(){
-        return $this->belongsToMany(User::class,'follows','user_id','following_id');
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_id');
     }
-    public function followers(){
-        return $this->belongsToMany(User::class,'follows','following_id','user_id');
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'user_id');
     }
-    public function getFollowingCountAttribute(){
+
+    public function getFollowingCountAttribute()
+    {
         return $this->following()->count();
     }
-    public function getFollowerCountAttribute(){
+
+    public function getFollowerCountAttribute()
+    {
         return $this->followers()->count();
     }
-    public function notifications(){
+
+    public function notifications()
+    {
         return $this->hasMany(Notification::class);
+    }
+
+    public function getFavoriteCountAttribute()
+    {
+        return $this->favorite()->count();
     }
 }
